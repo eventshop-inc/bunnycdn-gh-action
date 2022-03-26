@@ -1,4 +1,4 @@
-# bunnycdn-storage-deploy
+# bunnycdn-gh-action
 
 This action deploys selected directory to BunnyCDN storage. 
 
@@ -16,12 +16,22 @@ This action deploys selected directory to BunnyCDN storage.
 
 **Required** The storage API key.
 
+### `zoneID`
+
+The connected PullZone id
+
+### `zoneKey`
+
+The token for the pull zone
+
 ## Example usage
 ````
 - name: Deploy to BunnyCDN
-  uses: ayeressian/bunnycdn-storage-deploy@master
+  uses: Snider/bunnycdn-gh-action@master
   with:
     source: "dist"
     storageZoneName: "myzone"
     accessKey: "${{ secrets.BUNNY_CDN_STORAGE_KEY }}"
+    zoneID: "${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}"
+    zoneKey: "${{ secrets.BUNNY_CDN_ZONE_KEY }}"
 ````
