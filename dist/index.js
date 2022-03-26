@@ -4049,6 +4049,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const uploader_1 = __importDefault(__webpack_require__(721));
+const purge_1 = __importDefault(__webpack_require__(677));
 const core_1 = __webpack_require__(470);
 const path_1 = __webpack_require__(622);
 const github_action_helper_1 = __webpack_require__(61);
@@ -4057,8 +4058,13 @@ async function run() {
         const source = path_1.join(github_action_helper_1.Utils.getWorkspace(), core_1.getInput('source'));
         const storageZoneName = core_1.getInput('storageZoneName');
         const accessKey = core_1.getInput('accessKey');
+        const zoneId = core_1.getInput('zoneID');
+        const zoneKey = core_1.getInput('zoneKey');
         core_1.info(`Deploying ${source}`);
         await uploader_1.default(source, storageZoneName, accessKey);
+        if (zoneId) {
+            await purge_1.default(zoneId, zoneKey);
+        }
     }
     catch (error) {
         core_1.setFailed(error);
@@ -6609,6 +6615,12 @@ function convertBody(buffer, headers) {
 	// html4
 	if (!res && str) {
 		res = /<meta[\s]+?http-equiv=(['"])content-type\1[\s]+?content=(['"])(.+?)\2/i.exec(str);
+		if (!res) {
+			res = /<meta[\s]+?content=(['"])(.+?)\1[\s]+?http-equiv=(['"])content-type\3/i.exec(str);
+			if (res) {
+				res.pop(); // drop last quote
+			}
+		}
 
 		if (res) {
 			res = /charset=(.*)/i.exec(res.pop());
@@ -7616,7 +7628,7 @@ function fetch(url, opts) {
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
 					case 'error':
-						reject(new FetchError(`redirect mode is set to error: ${request.url}`, 'no-redirect'));
+						reject(new FetchError(`uri requested responds with a redirect, redirect mode is set to error: ${request.url}`, 'no-redirect'));
 						finalize();
 						return;
 					case 'manual':
@@ -7655,7 +7667,8 @@ function fetch(url, opts) {
 							method: request.method,
 							body: request.body,
 							signal: request.signal,
-							timeout: request.timeout
+							timeout: request.timeout,
+							size: request.size
 						};
 
 						// HTTP-redirect fetch step 9
@@ -9611,6 +9624,41 @@ if (process.platform === 'linux') {
 /***/ (function(module) {
 
 module.exports = require("util");
+
+/***/ }),
+
+/***/ 677:
+/***/ (function(__unusedmodule, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_fetch_1 = __importDefault(__webpack_require__(454));
+const core_1 = __webpack_require__(470);
+function purgeZone(zoneId, zoneKey) {
+    return node_fetch_1.default(`https://api.bunny.net/pullzone/${zoneId}/purgeCache`, {
+        method: 'POST',
+        headers: {
+            "AccessKey": zoneKey,
+        }
+    }).then(response => {
+        if (response.status === 200) {
+            core_1.info(`Cache purged`);
+        }
+        else {
+            throw new Error(`Error purging cache ${response.status}.`);
+        }
+        return response;
+    });
+}
+async function run(zoneId, zoneKey) {
+    await purgeZone(zoneId, zoneKey);
+}
+exports.default = run;
+
 
 /***/ }),
 

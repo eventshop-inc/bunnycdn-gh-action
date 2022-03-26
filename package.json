@@ -1,5 +1,5 @@
 {
-  "name": "bunnycdn-storage-deploy",
+  "name": "bunnycdn-gh-action",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ayeressian/bunnycdn-storage-deploy.git"
+    "url": "git+https://github.com/Snider/bunnycdn-gh-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ayeressian/bunnycdn-storage-deploy/issues"
+    "url": "https://github.com/Snider/bunnycdn-gh-action/issues"
   },
-  "homepage": "https://github.com/ayeressian/bunnycdn-storage-deploy#readme",
+  "homepage": "https://github.com/Snider/bunnycdn-gh-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^3.0.0",

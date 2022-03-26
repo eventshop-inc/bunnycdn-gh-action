@@ -13,8 +13,8 @@ async function run() {
     const zoneKey = getInput('zoneKey');
     info(`Deploying ${source}`);
     await uploader(source, storageZoneName, accessKey);
-    if(zoneID){
-      await purge(zoneID, zoneKey);
+    if(zoneId){
+      await purge(zoneId, zoneKey);
     }
   } catch (error) {
     setFailed(error);
