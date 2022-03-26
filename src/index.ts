@@ -9,7 +9,7 @@ async function run() {
     const source = join(Utils.getWorkspace(), getInput('source'));
     const storageZoneName = getInput('storageZoneName');
     const accessKey = getInput('accessKey');
-    const zoneId = getInput('zoneID');
+    const zoneId = getInput('zoneId');
     const zoneKey = getInput('zoneKey');
     info(`Deploying ${source}`);
     await uploader(source, storageZoneName, accessKey);

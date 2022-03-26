@@ -4058,7 +4058,7 @@ async function run() {
         const source = path_1.join(github_action_helper_1.Utils.getWorkspace(), core_1.getInput('source'));
         const storageZoneName = core_1.getInput('storageZoneName');
         const accessKey = core_1.getInput('accessKey');
-        const zoneId = core_1.getInput('zoneID');
+        const zoneId = core_1.getInput('zoneId');
         const zoneKey = core_1.getInput('zoneKey');
         core_1.info(`Deploying ${source}`);
         await uploader_1.default(source, storageZoneName, accessKey);
@@ -9645,8 +9645,14 @@ function purgeZone(zoneId, zoneKey) {
             "AccessKey": zoneKey,
         }
     }).then(response => {
-        if (response.status === 200) {
+        if (response.status === 204) {
             core_1.info(`Cache purged`);
+        }
+        else if (response.status === 401) {
+            core_1.info(`Auth failed`);
+        }
+        else if (response.status === 404) {
+            core_1.info(`Invalid zoneId`);
         }
         else {
             throw new Error(`Error purging cache ${response.status}.`);

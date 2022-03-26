@@ -1,18 +1,21 @@
-name: 'BunnyCDN storage deployer'
-description: 'BunnyCDN storage deployer'
+name: 'BunnyCDN GH Action'
+description: 'BunnyCDN GH Action'
 inputs:
   source:
     description: 'target directory to be deployed'
     required: true
     default: './dist'
   storageZoneName:
+    description: 'storage zone name'
     required: true
   accessKey:
+    description: 'Storage zone access key'
     required: true
-  zoneID:
+  zoneId:
+    description: 'Storage zone id'
     required: false
-    default: false
   zoneKey:
+    description: 'Storage zone key'
     required: false
     default: ''
 runs:
