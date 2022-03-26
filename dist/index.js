@@ -4060,10 +4060,16 @@ async function run() {
         const accessKey = core_1.getInput('accessKey');
         const zoneId = core_1.getInput('zoneId');
         const zoneKey = core_1.getInput('zoneKey');
-        core_1.info(`Deploying ${source}`);
-        await uploader_1.default(source, storageZoneName, accessKey);
-        if (zoneId) {
+        if (storageZoneName && accessKey) {
+            core_1.info(`Deploying ${source}`);
+            await uploader_1.default(source, storageZoneName, accessKey);
+        }
+        else if (zoneId && zoneKey) {
+            core_1.info(`Purging ${source}`);
             await purge_1.default(zoneId, zoneKey);
+        }
+        else {
+            core_1.setFailed('Missing required inputs');
         }
     }
     catch (error) {
