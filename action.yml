@@ -3,14 +3,14 @@ description: 'BunnyCDN GH Action'
 inputs:
   source:
     description: 'target directory to be deployed'
-    required: true
+    required: false
     default: './dist'
   storageZoneName:
     description: 'storage zone name'
-    required: true
+    required: false
   accessKey:
     description: 'Storage zone access key'
-    required: true
+    required: false
   zoneId:
     description: 'Storage zone id'
     required: false

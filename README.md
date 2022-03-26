@@ -2,29 +2,8 @@
 
 This action deploys selected directory to BunnyCDN storage. 
 
-## Inputs
 
-### `source`
-
-**Required** The source directory folder.
-
-### `storageZoneName`
-
-**Required** The name of your storage zone where you are connecting to.
-
-### `apiKey`
-
-**Required** The storage API key.
-
-### `zoneId`
-
-The connected PullZone id
-
-### `zoneKey`
-
-The token for the pull zone
-
-## Example usage
+## Upload and purge pull zone
 ````
 - name: Deploy to BunnyCDN
   uses: Snider/bunnycdn-gh-action@master
@@ -32,6 +11,25 @@ The token for the pull zone
     source: "dist"
     storageZoneName: "myzone"
     accessKey: "${{ secrets.BUNNY_CDN_STORAGE_KEY }}"
+    zoneId: "${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}"
+    zoneKey: "${{ secrets.BUNNY_CDN_ZONE_KEY }}"
+````
+
+## Upload 
+````
+- name: Upload to BunnyCDN
+  uses: Snider/bunnycdn-gh-action@master
+  with:
+    source: "dist"
+    storageZoneName: "myzone"
+    accessKey: "${{ secrets.BUNNY_CDN_STORAGE_KEY }}"
+````
+
+##  purge pull zone
+````
+- name: Purge BunnyCDN
+  uses: Snider/bunnycdn-gh-action@master
+  with:
     zoneId: "${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}"
     zoneKey: "${{ secrets.BUNNY_CDN_ZONE_KEY }}"
 ````
