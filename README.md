@@ -16,7 +16,7 @@ This action deploys selected directory to BunnyCDN storage.
 
 **Required** The storage API key.
 
-### `zoneID`
+### `zoneId`
 
 The connected PullZone id
 
@@ -32,6 +32,6 @@ The token for the pull zone
     source: "dist"
     storageZoneName: "myzone"
     accessKey: "${{ secrets.BUNNY_CDN_STORAGE_KEY }}"
-    zoneID: "${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}"
+    zoneId: "${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}"
     zoneKey: "${{ secrets.BUNNY_CDN_ZONE_KEY }}"
 ````
