@@ -5,10 +5,10 @@ import { info } from '@actions/core';
 
 function purgeZone(zoneID: string, accessKey: string) {
  
-  return fetch(`https://storage.bunnycdn.com/api/pullzone/purgeCache?id=${entry.zoneID}`, {
+  return fetch(`https://storage.bunnycdn.com/api/pullzone/purgeCache?id=${zoneID}`, {
     method: 'GET',
     headers: {
-      "AccessKey": accessKey,
+      "AccessKey": zoneKey,
     },
     body: readStream
   }).then(response => {
@@ -21,8 +21,8 @@ function purgeZone(zoneID: string, accessKey: string) {
   });
 }
 
-export default async function run( zoneID: string, accessKey: string): Promise<void> {
+export default async function run( zoneID: string, zoneKey: string): Promise<void> {
  
-    await purgeZone( zoneID, accessKey);
+    await purgeZone( zoneID, zoneKey);
   
 }
