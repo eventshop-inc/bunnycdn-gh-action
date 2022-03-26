@@ -4064,12 +4064,9 @@ async function run() {
             core_1.info(`Deploying ${source}`);
             await uploader_1.default(source, storageZoneName, accessKey);
         }
-        else if (zoneId && zoneKey) {
+        if (zoneId && zoneKey) {
             core_1.info(`Purging ${source}`);
             await purge_1.default(zoneId, zoneKey);
-        }
-        else {
-            core_1.setFailed('Missing required inputs');
         }
     }
     catch (error) {

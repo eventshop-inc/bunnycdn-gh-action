@@ -18,13 +18,12 @@ async function run() {
       info(`Deploying ${source}`);
       await uploader(source, storageZoneName, accessKey);
     }
-    else if(zoneId && zoneKey) {
+
+    if(zoneId && zoneKey) {
       info(`Purging ${source}`);
       await purge(zoneId, zoneKey);
     }
-    else {
-      setFailed('Missing required inputs');
-    }
+
 
   } catch (error) {
     setFailed(error);
