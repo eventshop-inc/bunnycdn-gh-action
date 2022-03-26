@@ -9,8 +9,14 @@ inputs:
     required: true
   accessKey:
     required: true
+  zoneID:
+    required: false
+    default: false
+  zoneKey:
+    required: false
+    default: ''
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   icon: 'upload-cloud'
