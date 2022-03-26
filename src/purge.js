@@ -3,10 +3,10 @@ import fetch from 'node-fetch';
 import readdirp from 'readdirp';
 import { info } from '@actions/core';
 
-function purgeZone(zoneID: string, accessKey: string) {
+function purgeZone(zoneID: string, zoneKey: string) {
  
-  return fetch(`https://storage.bunnycdn.com/api/pullzone/purgeCache?id=${zoneID}`, {
-    method: 'GET',
+  return fetch(`https://api.bunny.net/pullzone/${zoneID}/purgeCache`, {
+    method: 'POST',
     headers: {
       "AccessKey": zoneKey,
     },
