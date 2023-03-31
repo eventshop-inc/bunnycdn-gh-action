@@ -10,12 +10,12 @@ function purgeZone(zoneId: string, zoneKey: string) {
       "AccessKey": zoneKey,
     }
   }).then(response => {
-    if (response.status === 200) {
-      info(`Cache purged`);
+    if (response.status === 204) {
+      info('The cache was successfuly purged');
     }else if (response.status === 401) {
-      info(`Auth failed`);
+      info('The request authorization failed');
     }else if (response.status === 404) {
-      info(`Invalid zoneId`);
+      info('The Pull Zone with the requested ID does not exist');
     } else {
       throw new Error(`Error purging cache ${response.status}.`);
     }
