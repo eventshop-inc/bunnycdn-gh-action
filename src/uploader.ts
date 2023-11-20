@@ -3,14 +3,14 @@ import fetch from "node-fetch";
 import readdirp from "readdirp";
 import { info } from "@actions/core";
 
-function uploadFile(entry: readdirp.EntryInfo, storageName: string, filename: string, accessKey: string) {
+function uploadFile(entry: readdirp.EntryInfo, storageName: string, accessKey: string) {
   const readStream = fs.createReadStream(entry.fullPath);
   const REGION = "ny";
   const BASE_HOSTNAME = "storage.bunnycdn.com";
   const HOSTNAME = REGION ? `${REGION}.${BASE_HOSTNAME}` : BASE_HOSTNAME;
 
   info(`Deploying ${entry.path}`);
-  return fetch(`https://${HOSTNAME}/${storageName}/${filename}`, {
+  return fetch(`https://${HOSTNAME}/${storageName}/${entry.path}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/octet-stream",
@@ -27,8 +27,8 @@ function uploadFile(entry: readdirp.EntryInfo, storageName: string, filename: st
   });
 }
 
-export default async function run(path: string, storageName: string, filename: string, accessKey: string): Promise<void> {
+export default async function run(path: string, storageName: string, accessKey: string): Promise<void> {
   for await (const entry of readdirp(path)) {
-    await uploadFile(entry, storageName, filename, accessKey);
+    await uploadFile(entry, storageName, accessKey);
   }
 }

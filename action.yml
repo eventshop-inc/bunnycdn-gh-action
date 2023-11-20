@@ -10,15 +10,9 @@ inputs:
     required: false
   accessKey:
     description: 'Storage zone access key'
-    required: false
+    required: true
   zoneId:
     description: 'Storage zone id'
-    required: false
-  zoneKey:
-    description: 'Storage zone key'
-    required: false
-  filename:
-    description: 'Uploaded file name'
     required: false
 runs:
   using: 'node16'
