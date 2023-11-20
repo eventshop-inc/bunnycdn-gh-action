@@ -1,5 +1,6 @@
 import uploader from './uploader';
 import purge from './purge';
+import purgeUrl from './purgeUrl';
 import { getInput, setFailed, info } from '@actions/core';
 import { join } from 'path';
 import { Utils } from '@technote-space/github-action-helper';
@@ -12,6 +13,7 @@ async function run() {
     const accessKey = getInput('accessKey');
     const zoneId = getInput('zoneId');
     const zoneKey = getInput('zoneKey');
+    const url = getInput('url');
 
 
     if(storageZoneName && accessKey) {
@@ -20,11 +22,14 @@ async function run() {
     }
 
     if(zoneId && zoneKey) {
-      info(`Purging ${source}`);
-      await purge(zoneId, zoneKey);
+      if (url) {
+        info(`Purging ${url}`);
+        await purgeUrl(zoneKey, url);
+      } else {
+        info(`Purging ${source}`);
+        await purge(zoneId, zoneKey);
+      }
     }
-
-
   } catch (error) {
     setFailed(error);
   }

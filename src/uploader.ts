@@ -1,14 +1,19 @@
-import fs from 'fs';
-import fetch from 'node-fetch';
-import readdirp from 'readdirp';
-import { info } from '@actions/core';
+import fs from "fs";
+import fetch from "node-fetch";
+import readdirp from "readdirp";
+import { info } from "@actions/core";
 
 function uploadFile(entry: readdirp.EntryInfo, storageName: string, accessKey: string) {
   const readStream = fs.createReadStream(entry.fullPath);
+  const REGION = "ny";
+  const BASE_HOSTNAME = "storage.bunnycdn.com";
+  const HOSTNAME = REGION ? `${REGION}.${BASE_HOSTNAME}` : BASE_HOSTNAME;
+
   info(`Deploying ${entry.path}`);
-  return fetch(`https://storage.bunnycdn.com/${storageName}/${entry.path}`, {
-    method: 'PUT',
+  return fetch(`https://${HOSTNAME}/${storageName}/${entry.path}`, {
+    method: "PUT",
     headers: {
+      "Content-Type": "application/octet-stream",
       "AccessKey": accessKey,
     },
     body: readStream
