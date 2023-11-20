@@ -10,11 +10,7 @@ function uploadFile(entry: readdirp.EntryInfo, storageZoneName: string, accessKe
   const HOSTNAME = REGION ? `${REGION}.${BASE_HOSTNAME}` : BASE_HOSTNAME;
   const url = `https://${HOSTNAME}/${storageZoneName}/${entry.path}`;
 
-  info(`Deploying ${entry.path}`);
-  info(`URL: ${url}`)
-  info(`AccessKey: ${accessKey}`)
-  info(`Full path: ${entry.fullPath}`)
-  info(`Storage Name: ${storageZoneName}`)
+  info(`Deploying ${entry.path} to ${url} with AccessKey ${accessKey} and Storage Zone Name ${storageZoneName}`);
   return fetch(`https://${HOSTNAME}/${storageZoneName}/${entry.path}`, {
     method: "PUT",
     headers: {
