@@ -17,6 +17,9 @@ inputs:
   zoneKey:
     description: 'Storage zone key'
     required: false
+  filename:
+    description: 'Uploaded file name'
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
