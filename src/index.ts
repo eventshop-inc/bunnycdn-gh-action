@@ -27,7 +27,7 @@ async function run() {
       info(`Purging ${url}`);
       await purgeUrl(accessKey, url);
     }
-  } catch (error) {
+  } catch (error: any) {
     setFailed(error);
   }
 }

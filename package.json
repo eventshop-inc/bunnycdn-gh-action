@@ -9,22 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Snider/bunnycdn-gh-action.git"
+    "url": "git+https://github.com/eventshop-inc/bunnycdn-gh-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Snider/bunnycdn-gh-action/issues"
+    "url": "https://github.com/eventshop-inc/bunnycdn-gh-action/issues"
   },
-  "homepage": "https://github.com/Snider/bunnycdn-gh-action#readme",
+  "homepage": "https://github.com/eventshop-inc/bunnycdn-gh-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
     "@technote-space/github-action-helper": "^5.3.17",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
-    "@zeit/ncc": "^0.22.3",
+    "@vercel/ncc": "^0.38.1",
     "node-fetch": "^3.3.2",
     "readdirp": "^3.6.0"
   },
