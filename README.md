@@ -39,6 +39,6 @@ This action deploys selected directory to BunnyCDN storage.
 - name: Purge BunnyCDN URL
   uses: eventshop-inc/bunnycdn-gh-action@main
   with:
-    url: "https://arly-prod.b-cdn.net/arly.json"
+    url: "https://es-prod.b-cdn.net/es.json"
     zoneKey: "${{ secrets.BUNNY_CDN_ZONE_KEY }}"
 ````
