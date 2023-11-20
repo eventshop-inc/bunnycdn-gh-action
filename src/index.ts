@@ -12,10 +12,11 @@ async function run() {
     const accessKey = getInput('accessKey');
     const zoneId = getInput('zoneId');
     const url = getInput('url');
+    const filename = getInput('filename');
 
-    if(storageZoneName && accessKey) {
+    if(storageZoneName && accessKey && filename) {
       info(`Deploying ${source}`);
-      await uploader(source, storageZoneName, accessKey);
+      await uploader(source, storageZoneName, filename, accessKey);
     }
 
     if(accessKey && zoneId) {
