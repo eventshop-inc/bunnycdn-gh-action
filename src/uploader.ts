@@ -3,19 +3,19 @@ import fetch from "node-fetch";
 import readdirp from "readdirp";
 import { info } from "@actions/core";
 
-function uploadFile(entry: readdirp.EntryInfo, storageName: string, accessKey: string) {
+function uploadFile(entry: readdirp.EntryInfo, storageZoneName: string, accessKey: string) {
   const readStream = fs.createReadStream(entry.fullPath);
   const REGION = "ny";
   const BASE_HOSTNAME = "storage.bunnycdn.com";
   const HOSTNAME = REGION ? `${REGION}.${BASE_HOSTNAME}` : BASE_HOSTNAME;
-  const url = `https://${HOSTNAME}/${storageName}/${entry.path}`;
+  const url = `https://${HOSTNAME}/${storageZoneName}/${entry.path}`;
 
   info(`Deploying ${entry.path}`);
   info(`URL: ${url}`)
   info(`AccessKey: ${accessKey}`)
   info(`Full path: ${entry.fullPath}`)
-  info(`Storage Name: ${storageName}`)
-  return fetch(`https://${HOSTNAME}/${storageName}/${entry.path}`, {
+  info(`Storage Name: ${storageZoneName}`)
+  return fetch(`https://${HOSTNAME}/${storageZoneName}/${entry.path}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/octet-stream",
@@ -32,8 +32,8 @@ function uploadFile(entry: readdirp.EntryInfo, storageName: string, accessKey: s
   });
 }
 
-export default async function run(path: string, storageName: string, accessKey: string): Promise<void> {
+export default async function run(path: string, storageZoneName: string, accessKey: string): Promise<void> {
   for await (const entry of readdirp(path)) {
-    await uploadFile(entry, storageName, accessKey);
+    await uploadFile(entry, storageZoneName, accessKey);
   }
 }
