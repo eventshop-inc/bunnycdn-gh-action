@@ -8,8 +8,13 @@ function uploadFile(entry: readdirp.EntryInfo, storageName: string, accessKey: s
   const REGION = "ny";
   const BASE_HOSTNAME = "storage.bunnycdn.com";
   const HOSTNAME = REGION ? `${REGION}.${BASE_HOSTNAME}` : BASE_HOSTNAME;
+  const url = `https://${HOSTNAME}/${storageName}/${entry.path}`;
 
   info(`Deploying ${entry.path}`);
+  info(`URL: ${url}`)
+  info(`AccessKey: ${accessKey}`)
+  info(`Full path: ${entry.fullPath}`)
+  info(`Storage Name: ${storageName}`)
   return fetch(`https://${HOSTNAME}/${storageName}/${entry.path}`, {
     method: "PUT",
     headers: {
