@@ -14,15 +14,14 @@ function uploadFile(entry: readdirp.EntryInfo, storageZoneName: string, accessKe
   return fetch(`https://${HOSTNAME}/${storageZoneName}/${entry.path}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/octet-stream",
-      "AccessKey": accessKey,
+      "AccessKey": accessKey
     },
     body: readStream
   }).then(response => {
     if (response.status === 201) {
       info(`Successfull deployment of ${entry.path}`);
     } else {
-      throw new Error(`Uploading ${entry.path} has failed width status code ${response.status}.`);
+      throw new Error(`Uploading ${entry.path} has failed with status code ${response.status}.`);
     }
     return response;
   });
